@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Buddy State Javascript API",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "build": "tsc",
     "compile": "turbo run --concurrency=100% compile:js compile:typedefs",
