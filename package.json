@@ -13,9 +13,6 @@
     "style:fix": "turbo  run --concurrency=100% style:fix && pnpm prettier --log-level warn --ignore-unknown --write '{.,!packages}/*'",
     "test": "turbo run --concurrency=100% test:unit:browser test:unit:node"
   },
-  "dependencies": {
-    "@vendor/nanoid": "link:./packages/@vendor/nanoid"
-  },
   "devDependencies": {
     "typescript": "^5"
   },
