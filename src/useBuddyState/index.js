@@ -1,7 +1,6 @@
-"use client"
+import { nanoid } from "@vendor/nanoid";
+import { useEffect, useMemo,useState } from "react";
 
-import { useEffect, useState, useMemo } from "react";
-import { nanoid } from "nanoid";
 import { getStateInstance } from "../initBuddyState";
 
 /**
@@ -21,12 +20,12 @@ export const useBuddyState = (key, selector) => {
 
   // Observer object to interact with the observable source.
   const observer = useMemo(() => ({
+    complete() {
+      setValue(undefined); // Resets state value when observable is completed.
+    },
     id: uniqueId,
     next(nextValue) {
       setValue(nextValue); // Updates state value when observable pushes new values.
-    },
-    complete() {
-      setValue(undefined); // Resets state value when observable is completed.
     },
   }), [uniqueId]);
 

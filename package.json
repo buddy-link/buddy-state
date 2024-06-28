@@ -3,18 +3,21 @@
   "version": "1.0.0",
   "description": "Buddy State Javascript API",
   "private": true,
+  "main": "dist/index.js",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run --concurrency=100% build",
+    "build": "tsc",
+    "build-all": "turbo run --concurrency=100% build",
     "compile": "turbo run --concurrency=100% compile:js compile:typedefs",
     "lint": "turbo run --concurrency=100% test:lint",
     "style:fix": "turbo  run --concurrency=100% style:fix && pnpm prettier --log-level warn --ignore-unknown --write '{.,!packages}/*'",
     "test": "turbo run --concurrency=100% test:unit:browser test:unit:node"
   },
   "dependencies": {
-    "nanoid": "workspace:*"
+    "react": "18.1.0",
+    "@vendor/nanoid": "link:@vendor/nanoid"
   },
   "devDependencies": {
     "@solana/eslint-config-solana": "^3.0.3",
@@ -35,29 +38,10 @@
     "jest-watch-master": "^1.0.0",
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^2.2.2",
+    "pnpm": "9.1.0",
     "prettier": "^3.3",
     "tsup": "^8.1.0",
     "turbo": "^2.0.5"
-  },
-  "engineStrict": true,
-  "engines": {
-    "node": ">=14.0.0",
-    "npm": "please-use-pnpm",
-    "pnpm": "^9",
-    "yarn": "please-use-pnpm"
-  },
-  "packageManager": "pnpm@9.1.0",
-  "pnpm": {
-    "overrides": {
-      "@wallet-standard/base": "pre",
-      "conventional-changelog-conventionalcommits": ">= 8.0.0",
-      "jsdom": "^22",
-      "mock-socket": "^9.3.1",
-      "shelljs": ">=0.8.5"
-    },
-    "patchedDependencies": {
-      "jest-runner-prettier@1.0.0": "patches/jest-runner-prettier@1.0.0.patch"
-    }
   },
   "prettier": "@solana/prettier-config-solana",
   "exports": {
@@ -79,7 +63,6 @@
   "jsdelivr": "./dist/index.production.min.js",
   "umd": "./dist/index.production.min.js",
   "unpkg": "./dist/index.production.min.js",
-  "main": "./dist/index.node.cjs",
   "module": "./dist/index.node.mjs",
   "react-native": "./dist/index.native.mjs",
   "types": "./dist/types/index.d.ts",

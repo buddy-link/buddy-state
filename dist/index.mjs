@@ -1,17 +1,43 @@
+// src/useBuddyState/index.js
+import { nanoid } from "nanoid";
+import { useEffect, useMemo, useState } from "react";
+var useBuddyState = (key, selector) => {
+  const uniqueId = nanoid();
+  const stateInstance = getStateInstance();
+  const source = stateInstance.getSource(key);
+  const [value, setValue] = useState(source == null ? void 0 : source.getValue());
+  const observer = useMemo(() => ({
+    complete() {
+      setValue(void 0);
+    },
+    id: uniqueId,
+    next(nextValue) {
+      setValue(nextValue);
+    }
+  }), [uniqueId]);
+  useEffect(() => {
+    source == null ? void 0 : source.subscribe(observer);
+    return () => source == null ? void 0 : source.unsubscribe(observer.id);
+  }, [source, observer]);
+  const updateSource = (nextValue) => {
+    if (typeof nextValue === "function") {
+      source == null ? void 0 : source.next(nextValue(source.getValue()));
+    } else {
+      source == null ? void 0 : source.next(nextValue);
+    }
+  };
+  const selectedValue = useMemo(
+    () => selector ? selector(value) : value,
+    [value, selector]
+  );
+  return [selectedValue, updateSource];
+};
 
-export { useBuddyState } from '../useBuddyState';
-
-let globalStateInstance = null;
-
-/**
- * Factory function to create an Observable.
- * @param {*} initialValue The initial value of the Observable.
- * @returns An object representing the observable with methods to subscribe, unsubscribe, push next values, complete the observable, and get the current value.
- */
-export const Observable = (initialValue) => {
+// src/initBuddyState/index.js
+var globalStateInstance = null;
+var Observable = (initialValue) => {
   let value = initialValue;
-  let subscriptions = new Map();
-
+  let subscriptions = /* @__PURE__ */ new Map();
   return {
     complete() {
       subscriptions.forEach((observer) => observer.complete());
@@ -34,16 +60,9 @@ export const Observable = (initialValue) => {
     }
   };
 };
-
-/**
- * Creates an event bus with a given initial state.
- * @param {Object} initialState The initial state for the event bus.
- * @returns An object representing the event bus with methods to get source, update values, and access the observables.
- */
-const createEventBus = (initialState) => {
-  const observables = new Map();
+var createEventBus = (initialState) => {
+  const observables = /* @__PURE__ */ new Map();
   initialState.init(observables);
-
   return {
     getSource(id) {
       const next_source = observables.get(id);
@@ -63,42 +82,27 @@ const createEventBus = (initialState) => {
     }
   };
 };
-
-/**
- * Initializes the global state with the provided initial state.
- * @param {Object} initialState The initial state object.
- */
-export const initBuddyState = (initialState) => {
+var initBuddyState = (initialState) => {
   if (!globalStateInstance) {
-    console.log('Initializing Buddy State');
+    console.log("Initializing Buddy State");
     globalStateInstance = createEventBus({
       init(observables) {
         Object.keys(initialState).forEach((key) => {
           observables.set(key, Observable(initialState[key]));
         });
-      },
+      }
     });
   } else {
     console.warn("State has already been initialized.");
   }
 };
-
-/**
- * Returns the global state instance.
- * @returns The global state instance.
- * @throws If the state has not been initialized.
- */
-export const getStateInstance = () => {
+var getStateInstance = () => {
   if (!globalStateInstance) {
     throw new Error("State has not been initialized. Please initialize state at the root of your application.");
   }
   return globalStateInstance;
 };
-
-/**
- * Resets the global state for testing purposes.
- */
-export const resetGlobalStateForTesting = () => {
-  console.log('Resetting Buddy State');
-  globalStateInstance = null;
+export {
+  initBuddyState,
+  useBuddyState
 };
