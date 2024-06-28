@@ -1,9 +1,15 @@
 # buddy-state
 A tiny react state manager that lives outside of react context
 
-### 1. Install pnpm 9.1.0
-``npm install -g pnpm@9.1.0``
+## Getting Started
+First, install the dependencies by running
 
-### 2. Use pnpm to add devDependencies
-``pnpm install``
+``bun install``
 
+Next, link this submodule for local bun development
+
+``bun link``
+
+Then, build the project
+
+``bun run build``

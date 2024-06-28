@@ -29,3 +29,6 @@ test-ledger/
 .ghpages-deploy
 
 .idea/
+
+bun.lockb
+tsconfig.tsbuildinfo
