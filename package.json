@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run --concurrency=100% build",
+    "build": "tsc",
     "compile": "turbo run --concurrency=100% compile:js compile:typedefs",
     "lint": "turbo run --concurrency=100% test:lint",
     "style:fix": "turbo  run --concurrency=100% style:fix && pnpm prettier --log-level warn --ignore-unknown --write '{.,!packages}/*'",
