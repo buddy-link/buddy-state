@@ -5,13 +5,9 @@ build_project() {
   local dir=$1
   echo "Building project in $dir"
   cd $dir
-  bun install
+  pnpm install
   cd -
 }
-
-# Build the main project
-echo "Building the main project"
-bun install
 
 # Build all submodules in the packages directory
 for submodule in packages/*; do
@@ -19,3 +15,8 @@ for submodule in packages/*; do
     build_project "$submodule"
   fi
 done
+
+# Build the main project
+echo "Building the main project"
+pnpm install
+tsc
