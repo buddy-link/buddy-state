@@ -32,3 +32,6 @@ test-ledger/
 
 bun.lockb
 tsconfig.tsbuildinfo
+
+dist/
+dist/*

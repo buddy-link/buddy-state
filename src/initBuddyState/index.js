@@ -1,5 +1,5 @@
 
-export { useBuddyState } from '../hooks/useBuddyState';
+export { useBuddyState } from '../useBuddyState';
 
 let globalStateInstance = null;
 

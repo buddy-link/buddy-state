@@ -1,57 +1,14 @@
 {
   "name": "buddy-state",
   "version": "1.0.0",
+  "type": "module",
   "description": "Buddy State Javascript API",
   "private": true,
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "compile": "turbo run --concurrency=100% compile:js compile:typedefs",
-    "lint": "turbo run --concurrency=100% test:lint",
-    "style:fix": "turbo  run --concurrency=100% style:fix && pnpm prettier --log-level warn --ignore-unknown --write '{.,!packages}/*'",
-    "test": "turbo run --concurrency=100% test:unit:browser test:unit:node"
+    "build": "bun build src/index.js --outdir dist"
   },
-  "devDependencies": {
-    "typescript": "^5"
-  },
-  "exports": {
-    "browser": {
-      "import": "./dist/index.browser.mjs",
-      "require": "./dist/index.browser.cjs"
-    },
-    "node": {
-      "import": "./dist/index.node.mjs",
-      "require": "./dist/index.node.cjs"
-    },
-    "react-native": "./dist/index.native.mjs",
-    "types": "./dist/types/index.d.ts"
-  },
-  "browser": {
-    "./dist/index.node.cjs": "./dist/index.browser.cjs",
-    "./dist/index.node.mjs": "./dist/index.browser.mjs"
-  },
-  "jsdelivr": "./dist/index.production.min.js",
-  "umd": "./dist/index.production.min.js",
-  "unpkg": "./dist/index.production.min.js",
-  "main": "./dist/index.node.cjs",
-  "module": "./dist/index.node.mjs",
-  "react-native": "./dist/index.native.mjs",
-  "types": "./dist/types/index.d.ts",
-  "type": "commonjs",
-  "files": [
-    "./dist/"
-  ],
-  "bundlewatch": {
-    "defaultCompression": "gzip",
-    "files": [
-      {
-        "path": "./dist/index*.js"
-      }
-    ]
-  },
-  "sideEffects": false,
-  "keywords": [
-    "blockchain",
-    "buddy",
-    "web3"
-  ]
+  "dependencies": {
+    "react": "^18"
+  }
 }
