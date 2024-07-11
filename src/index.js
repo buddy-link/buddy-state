@@ -1,5 +1,5 @@
 
-export { initBuddyState } from './initBuddyState';
+export { initBuddyState, getStateInstance, resetGlobalStateForTesting, Observable } from './initBuddyState';
 export { useBuddyState } from './useBuddyState';
 
 /**

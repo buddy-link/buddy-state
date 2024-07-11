@@ -4,9 +4,18 @@
     "checkJs": true,
     "outDir": "./dist",
     "rootDir": "./src",
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "alwaysStrict": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

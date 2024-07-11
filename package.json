@@ -5,10 +5,14 @@
   "description": "Buddy State Javascript API",
   "private": true,
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "bun build src/index.js --outdir dist"
+    "build": "bun build src/index.js --outdir dist && tsc"
   },
   "dependencies": {
     "react": "^18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3"
   }
 }

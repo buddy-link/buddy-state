@@ -1923,11 +1923,18 @@ var getStateInstance = () => {
   }
   return globalStateInstance;
 };
+var resetGlobalStateForTesting = () => {
+  console.log("Resetting Buddy State");
+  globalStateInstance = null;
+};
 
 // src/index.js
 var test = () => true;
 export {
   useBuddyState,
   test,
-  initBuddyState2 as initBuddyState
+  resetGlobalStateForTesting,
+  initBuddyState2 as initBuddyState,
+  getStateInstance,
+  Observable
 };

@@ -22,6 +22,9 @@ export const useBuddyState = (key, selector) => {
   // Observer object to interact with the observable source.
   const observer = useMemo(() => ({
     id: uniqueId,
+    /**
+       * @param {any} nextValue
+     */
     next(nextValue) {
       setValue(nextValue); // Updates state value when observable pushes new values.
     },
@@ -37,7 +40,7 @@ export const useBuddyState = (key, selector) => {
   }, [source, observer]);
 
   // Function to update the observable source's value.
-  const updateSource = (nextValue) => {
+  const updateSource = (/** @type {(arg0: any) => any} */ nextValue) => {
     if (typeof nextValue === 'function') {
       source?.next(nextValue(source.getValue()))
     } else {
