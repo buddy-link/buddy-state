@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState, useMemo } from "react";
 import { nanoid } from "../vendor";
 import { getStateInstance } from "../initBuddyState";
