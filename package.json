@@ -4,15 +4,45 @@
   "type": "module",
   "description": "Buddy State Javascript API",
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "bun build src/index.js --outdir dist && tsc"
+    "generate-docs": "jsdoc -c jsdoc.json",
+    "build": "vite build && tsc",
+    "build-watch": "bun run build --watch",
+    "test": "vitest",
+    "watch": "tsc --watch",
+    "publish": "bun publish --access public"
   },
-  "dependencies": {
-    "react": "^18"
+  "peerDependencies": {
+    "react": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3"
-  }
+    "@babel/cli": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "@types/react": "^18.3.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "jsdoc": "4.0.2",
+    "jsdom": "24.0.0",
+    "vite": "5.1.3",
+    "vite-plugin-dts": "^3.7.2",
+    "vite-plugin-env-compatible": "^2.0.1",
+    "vite-plugin-node-polyfills": "^0.21.0",
+    "vitest": "1.3.0",
+    "typescript": "^5.4.1"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js",
+      "default": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
 }

@@ -1,5 +1,4 @@
 
-export { useBuddyState } from '../useBuddyState';
 
 let globalStateInstance = null;
 

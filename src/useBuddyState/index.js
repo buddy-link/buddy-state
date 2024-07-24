@@ -47,8 +47,7 @@ export const useBuddyState = (key, selector) => {
   };
 
   // useMemo hook to apply the selector function to the state value if provided.
-  const selectedValue = useMemo(
-    () => selector ? selector(value) : value,
+  const selectedValue = useMemo(() => selector ? selector(value) : value,
     [value, selector]
   );
 
