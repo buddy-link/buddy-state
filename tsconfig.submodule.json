@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
+    "composite": true, // Allows using references"
     "allowJs": true,
     "checkJs": true,
-    "outDir": "./dist",
+    "declarationDir": "../../dist/frontend/buddy-state",
+    "outDir": "../../dist/frontend/buddy-state", // Points to the root 'dist' with subfolder for submodule
     "rootDir": "./src",
+    "baseUrl": "./",
     "declaration": true,
     "emitDeclarationOnly": false,
     "esModuleInterop": true,
@@ -15,7 +18,11 @@
     "strictBindCallApply": false,
     "strictPropertyInitialization": false,
     "noImplicitThis": false,
-    "alwaysStrict": false
+    "alwaysStrict": false,
+    "paths": {
+      "src/*": ["./src/*"],
+      "buddy-state/*": ["../../dist/frontend/buddy-state/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

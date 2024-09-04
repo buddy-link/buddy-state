@@ -8,7 +8,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "generate-docs": "jsdoc -c jsdoc.json",
-    "build": "vite build && tsc",
+    "build": "vite build --config vite.config.js && tsc --emitDeclarationOnly --project tsconfig.json",
+    "build-as-submodule": "vite build --config vite.submodule.config.js && tsc --emitDeclarationOnly --project tsconfig.submodule.json",
     "build-watch": "bun run build --watch",
     "test": "vitest",
     "watch": "tsc --watch",
